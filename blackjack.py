@@ -23,8 +23,8 @@ def main():
     def take_bet(chips):
         while True:
             try:
-                chips.bet = int(input("Please enter your bet: "))
-            except TypeError:
+                chips.bet = int(input("Please place your bet: "))
+            except:
                 print("Whoops, please enter an integer")
             else:
                 if chips.bet > chips.total:
@@ -56,7 +56,7 @@ def main():
 
     def show_some(player,dealer):
         print("\n Dealer's hand: ")
-        print("First card hidden!")
+        print("<First card hidden>")
         print(dealer.cards[1])
         
         print("\n Players hand:")
@@ -67,19 +67,21 @@ def main():
     def show_all(player,dealer):
         print("\n Dealer's hand: ",*dealer.cards,sep='\n')
         
-        print(f"Values of dealers hand is: {dealer.value}")
+        print(f"Total: {dealer.value}")
         
         print("\n Players hand:",*player.cards,sep='\n')
         
-        print(f"Value of players hand is {player.value}")
+        print(f"Total: {player.value}")
+
+
+    
 
         
-
-
-
     player_chips = Chips()
+    print("WELCOME TO BLACKJACK!!\nGet as close as you can to 21 without going over. Dealer hits until their total is 17 or over & aces count as 11.")
+    print(f"You have {player_chips.total} Chips, use them wisely!")
+    
     while True:
-        print("WELCOME TO BLACKJACK!!")
 
         deck = Deck()
         deck.shuffle()
@@ -92,9 +94,6 @@ def main():
         dealer_hand.add_card(deck.deal())
 
         
-
-       
-
         take_bet(player_chips)
 
         show_some(player_hand,dealer_hand)
@@ -124,20 +123,39 @@ def main():
                 player_wins(player_hand,dealer_hand,player_chips)
             else:
                 push(player_hand,dealer_hand)
-        print(f'You now have {player_chips.total}')
-
-        new_game = input("Would you like to play another hand? y/n ")
-        if new_game.lower() == 'y' and player_chips.total > 0:
-            playing = True
-            continue
-        elif new_game.lower() == 'y' and player_chips.total <=0:
-            print("You are out of chips!\n Game Over!")
-            playing = False
-            break
-        else:
+        print(f'You now have {player_chips.total} chips!')
+        if player_chips.total <=0:
+            print("Game over!")
             print("Thank you for playing!")
             playing = False
             break
+        
+        
+        
+        new_game = input("Would you like to play another hand? y/n ")
+        if new_game.lower() == 'y':
+            playing = True
+            continue
+        elif new_game.lower() == 'n':
+            print("Thank you for playing!")
+            playing = False
+            break
+    
+
+        else:
+            while new_game.lower() != 'y' and new_game.lower() != 'n':
+                new_game = input("Whoops, plesae enter y or n: ")
+                if new_game.lower() == 'y':
+                    playing = True
+                    continue
+                elif new_game.lower() == 'n':
+                    print("Thank you for playing!")
+                    playing = False
+                    break
+                
+            
+
+           
 
             
 
