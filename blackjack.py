@@ -91,7 +91,7 @@ def main():
         player_hand.add_card(deck.deal())
         dealer_hand.add_card(deck.deal())
 
-        print(type(player_chips))
+        
 
        
 
@@ -103,7 +103,7 @@ def main():
             hit_or_stand(deck, player_hand)
 
             show_some(player_hand,dealer_hand)
-            print("Playing:", playing)
+            
 
             if player_hand.value > 21:
                 player_busts(player_hand,dealer_hand,player_chips)
@@ -127,10 +127,10 @@ def main():
         print(f'You now have {player_chips.total}')
 
         new_game = input("Would you like to play another hand? y/n ")
-        if new_game.lower() == 'y' and player_chips > 0:
+        if new_game.lower() == 'y' and player_chips.total > 0:
             playing = True
             continue
-        elif new_game.lower() == 'y' and player_chips <= 0:
+        elif new_game.lower() == 'y' and player_chips.total <=0:
             print("You are out of chips!\n Game Over!")
             playing = False
             break
